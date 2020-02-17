@@ -9,6 +9,6 @@ namespace Elaimet
 {
     public class Koira : Elain
     {
-
+        int test;
     }
 }
