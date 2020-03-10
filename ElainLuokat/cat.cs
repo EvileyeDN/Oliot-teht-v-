@@ -7,16 +7,21 @@ using ElainLuokat;
 
 namespace Elaimet
 {
-    public class Cat : Elain
+    public class Cat : Nisakkaat
     {
+        public override void Ääntele()
+        {
+            Console.WriteLine("Hrrr");
+        }
         public Cat()
         {
             
         }
-        public void kehrää(string Hrr)
+        public void kehrää()
         {
-            Hrr = "Hrr";
+            Console.WriteLine("Hrrr");
         }
+        
     }
      
 }

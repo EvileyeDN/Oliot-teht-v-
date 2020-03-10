@@ -49,6 +49,7 @@
     <Compile Include="Hevonen.cs" />
     <Compile Include="Linnut.cs" />
     <Compile Include="Nisakkaat.cs" />
+    <Compile Include="Papukaija.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

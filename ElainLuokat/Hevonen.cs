@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElainLuokat;
 
 namespace Elaimet
 {   //Esitellään luokka eli class. Koodi olisi voinut olla Program.cs tiedostossa mutta selkeyden takia luomme jokaisen luokan
     //omaan tiedostoonsa
-   public class Hevonen
+   public class Hevonen: Nisakkaat
     {
         private string nimi;
         private int paino;

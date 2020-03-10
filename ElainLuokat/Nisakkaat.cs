@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace ElainLuokat
 {
-    class Nisakkaat : Elain
+   public class Nisakkaat : Elain
     {
+        private int käsissä;
+
+        public int Käsissä { get => käsissä; set => käsissä = value; }
+        public void AsetaNisakkatKäsissä(int Kasissa)
+        {
+            this.käsissä = Kasissa;
+
+        }
+        public void NisakkaatAtribuutti()
+        {
+            käsissä = 2;
+            Console.Write("On " + käsissä + " käsissä");
+        }
     }
 }

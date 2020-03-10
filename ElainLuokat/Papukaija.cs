@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElainLuokat;
 
-namespace Elaimet
+namespace ElainLuokat
 {
-    public class Koira : Nisakkaat
+  public  class Papukaija : Linnut
     {
         public override void Ääntele()
         {
-            Console.WriteLine("woof");
+            Console.WriteLine("Hello");
         }
-       
     }
 }
