@@ -17,10 +17,10 @@ namespace ika
             Cat kissa = new Cat();
             for (int i = 0; i<=9; i++)
             {
-                //kissa.KissanIka(rand.Next(1, 11));
-                dog.KoiraIka(rand.Next(1, 16));
-                Console.WriteLine("Koiran ika: "+dog.Ika+" "+ "Kissan ika: "+kissa.Ika);
-                if (dog.Ika > kissa.Ika)
+                kissa.Eilainika(rand.Next(1, 11));
+                dog.Eilainika(rand.Next(1, 16));
+                Console.WriteLine("Koiran ika: "+dog.IkaEilain+" "+ "Kissan ika: "+kissa.IkaEilain);
+                if (dog.IkaEilain > kissa.IkaEilain)
                 {
                     Console.WriteLine("Koira on vanhempi");
                 }
@@ -29,6 +29,7 @@ namespace ika
                     Console.WriteLine("Kissa on vanhempi");
                 }
             }
+            
 
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elaimet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +12,33 @@ namespace ElainLuokat
         public abstract int GetArea();
     }
     public abstract class Elain
-    {  
-        
+    {
 
         private int ikaEilain;
         private string nimiEilain;
         private bool onLihanSyoja;
         private string Lihasyo;
         private string Nimi;
+        private int ikaEilainEmo;
+        private string nimiEilainEmo;
+        private int KuinkaPaljonAiti=0;
         List<int> EilainTestIka = new List<int>();
         List<string> EilainNimiTest = new List<string>();
+        List<string> EmoKissa = new List<string>();
+        List<int> EmoKissaIka = new List<int>();
+        List<int> ÄitiID = new List<int>();
+        List<string> EmoKissaPentu = new List<string>();
+
+
 
         public int IkaEilain { get => ikaEilain; set => ikaEilain = value; }
         public string NimiEilain { get => nimiEilain; set => nimiEilain = value; }
         public bool OnLihanSyoja { get => onLihanSyoja; set => onLihanSyoja = value; }
+        public string NimiEilainEmo { get => nimiEilainEmo; set => nimiEilainEmo = value; }
+        public int IkaEilainEmo { get => ikaEilainEmo; set => ikaEilainEmo = value; }
         public Elain()
         {
-         
+            
             
         }
         public Elain(string nimi, int ika)
@@ -37,12 +48,82 @@ namespace ElainLuokat
             
 
         }
+        public void ListCount()
+        {
+            Console.WriteLine(EilainTestIka.Count());
+            Console.WriteLine(EilainNimiTest.Count());
+        }
+        public void AddKissaÄiti()
+        {
+            this.KuinkaPaljonAiti++;
+            string nimi = "";
+            int ika = 0;
+            Console.WriteLine("Aseta Elaimen ika");
+            ika = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Aseta Elaimen nimi");
+            nimi = Console.ReadLine();
+            nimi = nimi + "(Äiti)";
+            this.NimiEilainEmo = nimi;
+            EmoKissa.Add(nimi);
+            this.ÄitiID.Add(EmoKissa.Count()-1);
+            this.ikaEilainEmo = ika;
+            EmoKissaIka.Add(ika);
+            
+        }
+        public void AddKissanPentu()
+        {
+            int ID = 0;
+            string nimi = "";
+            Console.WriteLine("Aseta Pentu Nimi");
+            nimi = Console.ReadLine();
+            Console.WriteLine("Jä hänen äiti on. Valitse ID");
+            for (int i = 0; i<=this.KuinkaPaljonAiti; i++)
+           {
+                if (i == this.ÄitiID.Count())
+                {
+                    break;
+                }
+                Console.WriteLine(EmoKissa.ElementAt(ÄitiID.ElementAt(i))+" Hanen ID on: "+i);
+              }
+            ID = Convert.ToInt32(Console.ReadLine());
+            EmoKissaPentu.Add(nimi+" Ja Hänen Äiti on: "+EmoKissa.ElementAt(ÄitiID.ElementAt(ID)));
+            this.NimiEilainEmo = nimi;
+            EmoKissa.Add(nimi);
+            this.IkaEilainEmo = 0;
+            EmoKissaIka.Add(0);
+          
+        }
+        public void ListEmoTulosta()
+        {
+            int A = 0;
+            foreach (string C in this.EmoKissa)
+            {
+                Console.Write(" Nimi: " + C);
+                Console.Write(" Ika: " + EmoKissaIka.ElementAt(A));
+                A++;
+            }
+            Console.WriteLine();
+        }
+        public void PentuWhoEuarAiti()
+        {
+
+            foreach (string C in this.EmoKissaPentu)
+            {
+                Console.WriteLine(" Nimi: " + C);
+
+            }
+        }
         public void ListNimiTulosta()
         {
-            foreach(string C in this.EilainNimiTest)
+            int A = 0;
+            foreach (string C in this.EilainNimiTest)
             {
-                Console.WriteLine(C);
+                Console.Write(" Nimi: " + C);
+                Console.Write(" Ika: "+EilainTestIka.ElementAt(A));
+                A++;
             }
+            
+            Console.WriteLine();
         }
         public void Lihansyoja(bool Liha)
         {
@@ -58,8 +139,8 @@ namespace ElainLuokat
         public void eläintenmäärää()
         {
             int eeläintenmäärää = 0;
-            int ika = 0;
             string nimi = "";
+            int ika = 0;
             Console.WriteLine("eläinten määrää?");
             eeläintenmäärää = Convert.ToInt32(Console.ReadLine());
             for (int i = 0; i<eeläintenmäärää; i++)
@@ -72,6 +153,7 @@ namespace ElainLuokat
             }
             
         }
+        
         public void AsetaNimi()
         {
             Random rand = new Random();
@@ -146,6 +228,30 @@ namespace ElainLuokat
             this.ikaEilain = ikaEilain;
             EilainTestIka.Add(ikaEilain);
         }
+        public string EmoNimiEilain
+        {
+            
+                get
+            {
+                return nimiEilainEmo;
+            }
+
+            set
+            {
+                nimiEilainEmo = value;
+            }
+        }
+        public int EmoEIKAeilain
+        {
+            get
+            {
+                return ikaEilainEmo;
+            }
+            set
+            {
+                ikaEilainEmo = value;
+            }
+        }
         public string NIMIEilain
         {
             get
@@ -205,8 +311,8 @@ namespace ElainLuokat
                     Console.Write(ikä);
                     Console.Write(" Nimi: ");
                     AsetaNimi();
-                    
                     Lihansyoja(true);
+                    Console.Write(" "+Lihasyo);
                     Console.WriteLine();
                     Console.Write("Koira" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -214,6 +320,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(true);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Papukaija" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -221,6 +328,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(false);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Hevonen" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -228,6 +336,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(false);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     check++;
                 }
@@ -239,6 +348,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(true);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Papukaija" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -246,6 +356,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(false);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Kissa" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -253,6 +364,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(true);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Hevonen" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -260,6 +372,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(false);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     check++;
                 }
@@ -272,6 +385,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(false);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Kissa" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -279,6 +393,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(true);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Koira" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -286,6 +401,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(true);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     Console.Write("Hevonen" + " ikä: ");
                     ikä = rand.Next(1, 13);
@@ -293,6 +409,7 @@ namespace ElainLuokat
                     Console.Write(" Nimi: ");
                     AsetaNimi();
                     Lihansyoja(false);
+                    Console.Write(" " + Lihasyo);
                     Console.WriteLine();
                     check = 1;
                 }
